@@ -1,18 +1,13 @@
-"""Make `main` importable; route `tmp_path` through pyfakefs so all I/O is in-memory."""
+"""Route `tmp_path` through pyfakefs so all I/O is in-memory."""
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parent.parent
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-
-# Force pre-import of `main` (and its deps) on REAL filesystem, before any
-# pyfakefs activation, so guessit's bundled regex/yaml data is loaded.
-import main  # noqa: E402,F401
+# Force pre-import on REAL filesystem before any pyfakefs activation,
+# so guessit's bundled regex/yaml data is loaded into memory.
+import dedupe_episodes  # noqa: F401
 
 
 @pytest.fixture

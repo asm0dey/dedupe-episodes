@@ -18,7 +18,7 @@ from hamcrest import (
     not_,
 )
 
-import main as dedupe
+from dedupe_episodes import cli as dedupe
 from pyfakefs.fake_filesystem import FakeFilesystem
 
 
