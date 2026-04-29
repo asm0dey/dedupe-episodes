@@ -1,0 +1,21 @@
+[project]
+name = "dedupe-episodes"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "guessit>=3.8.0",
+    "tqdm>=4.67.3",
+]
+
+[dependency-groups]
+dev = [
+    "pyfakefs>=6.2.0",
+    "pyhamcrest>=2.1.0",
+    "pytest>=9.0.3",
+]
+
+[tool.uv]
+# Cache and project dirs may be on different filesystems (no hardlinks).
+link-mode = "copy"
