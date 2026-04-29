@@ -3,7 +3,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/dedupe-episodes.svg)](https://pypi.org/project/dedupe-episodes/)
 [![Python versions](https://img.shields.io/pypi/pyversions/dedupe-episodes.svg)](https://pypi.org/project/dedupe-episodes/)
 [![License](https://img.shields.io/pypi/l/dedupe-episodes.svg)](https://github.com/asm0dey/dedupe-episodes/blob/main/LICENSE)
-[![Tests](https://img.shields.io/badge/tests-53%20passing-brightgreen.svg)](https://github.com/asm0dey/dedupe-episodes/tree/main/tests)
+[![CI](https://github.com/asm0dey/dedupe-episodes/actions/workflows/ci.yml/badge.svg)](https://github.com/asm0dey/dedupe-episodes/actions/workflows/ci.yml)
 
 Scan a TV show library, detect duplicate episodes at different qualities,
 keep the best, delete the rest (and their sidecar `.nfo` / `-thumb.jpg` /
