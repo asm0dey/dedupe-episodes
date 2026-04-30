@@ -1,0 +1,83 @@
+name: Release binaries
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write  # Needed by softprops/action-gh-release to create/edit releases.
+
+jobs:
+  build:
+    name: Build ${{ matrix.os }} (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: linux
+            arch: x86_64
+            runner: ubuntu-latest
+            asset: dedupe-episodes-linux-x86_64
+            ext: ""
+          - os: macos
+            arch: arm64
+            runner: macos-latest
+            asset: dedupe-episodes-macos-arm64
+            ext: ""
+          - os: windows
+            arch: x86_64
+            runner: windows-latest
+            asset: dedupe-episodes-windows-x86_64.exe
+            ext: ".exe"
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install patchelf (Linux only — Nuitka requirement)
+        if: matrix.os == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y patchelf
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Build with Nuitka
+        shell: bash
+        run: |
+          uv run python -m nuitka \
+            --onefile \
+            --output-filename="dedupe-episodes${{ matrix.ext }}" \
+            --output-dir=build-nuitka \
+            --assume-yes-for-downloads \
+            --include-package=guessit \
+            --include-package-data=guessit \
+            --include-package=babelfish \
+            --include-package-data=babelfish \
+            --include-package=rebulk \
+            --remove-output \
+            src/dedupe_episodes/cli.py
+
+      - name: Smoke-test binary
+        shell: bash
+        run: |
+          ./build-nuitka/dedupe-episodes${{ matrix.ext }} --help
+
+      - name: Rename artifact
+        shell: bash
+        run: |
+          mv "build-nuitka/dedupe-episodes${{ matrix.ext }}" \
+             "build-nuitka/${{ matrix.asset }}"
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build-nuitka/${{ matrix.asset }}
+          fail_on_unmatched_files: true
+          generate_release_notes: true

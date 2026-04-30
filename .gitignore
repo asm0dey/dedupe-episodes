@@ -11,4 +11,7 @@ wheels/
 
 # pytest
 .pytest_cache/
-dist/
+
+# Nuitka / PyInstaller binary builds
+build-nuitka/
+build-pyinstaller/
