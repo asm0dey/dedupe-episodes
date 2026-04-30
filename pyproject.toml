@@ -44,7 +44,7 @@ packages = ["src/dedupe_episodes"]
 
 [dependency-groups]
 dev = [
-    "nuitka>=4.0.8",
+    "nuitka[onefile]>=4.0.8",
     "pyfakefs>=6.2.0",
     "pyhamcrest>=2.1.0",
     "pytest>=9.0.3",

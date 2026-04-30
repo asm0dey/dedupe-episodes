@@ -61,6 +61,7 @@ jobs:
             --include-package=babelfish \
             --include-package-data=babelfish \
             --include-package=rebulk \
+            --nofollow-import-to=rebulk.test \
             --remove-output \
             src/dedupe_episodes/cli.py
 
