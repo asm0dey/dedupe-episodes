@@ -26,6 +26,11 @@ jobs:
             runner: macos-latest
             asset: dedupe-episodes-macos-arm64
             ext: ""
+          - os: macos
+            arch: x86_64
+            runner: macos-13
+            asset: dedupe-episodes-macos-x86_64
+            ext: ""
           - os: windows
             arch: x86_64
             runner: windows-latest
