@@ -72,7 +72,7 @@ jobs:
              "build-nuitka/${{ matrix.asset }}"
 
       - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: build-nuitka/${{ matrix.asset }}
           fail_on_unmatched_files: true
