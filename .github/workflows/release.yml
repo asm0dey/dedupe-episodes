@@ -51,17 +51,12 @@ jobs:
       - name: Build with Nuitka
         shell: bash
         run: |
+          # Nuitka options (--onefile, --include-package=*, etc.) are baked
+          # into src/dedupe_episodes/cli.py via `nuitka-project:` comments.
           uv run python -m nuitka \
-            --onefile \
             --output-filename="dedupe-episodes${{ matrix.ext }}" \
             --output-dir=build-nuitka \
             --assume-yes-for-downloads \
-            --include-package=guessit \
-            --include-package-data=guessit \
-            --include-package=babelfish \
-            --include-package-data=babelfish \
-            --include-package=rebulk \
-            --nofollow-import-to=rebulk.test \
             --remove-output \
             src/dedupe_episodes/cli.py
 

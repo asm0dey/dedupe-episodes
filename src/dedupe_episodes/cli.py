@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+# Nuitka build options (auto-applied when compiling this file with Nuitka).
+# nuitka-project: --onefile
+# nuitka-project: --include-package=guessit
+# nuitka-project: --include-package-data=guessit
+# nuitka-project: --include-package=babelfish
+# nuitka-project: --include-package-data=babelfish
+# nuitka-project: --include-package=rebulk
+# nuitka-project: --nofollow-import-to=rebulk.test
+# nuitka-project: --nofollow-import-to=guessit.test
 """Dedupe TV episodes by quality. Keep best, delete worse + sidecar files.
 
 Quality ranking:
