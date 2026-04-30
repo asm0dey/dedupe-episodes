@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Strict-semver gate: skip pre-release / test tags (e.g. v0.1.2-test, v0.1.2-rc1).
+    # Only clean vX.Y.Z tags hit PyPI.
+    if: ${{ !contains(github.ref_name, '-') }}
     steps:
       - uses: actions/checkout@v6
 
