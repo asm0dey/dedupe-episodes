@@ -6,8 +6,8 @@
 # nuitka-project: --include-package=babelfish
 # nuitka-project: --include-package-data=babelfish
 # nuitka-project: --include-package=rebulk
-# nuitka-project: --nofollow-import-to=rebulk.test
-# nuitka-project: --nofollow-import-to=guessit.test
+# Quietly skip pytest-using submodules (rebulk.test, guessit.test) at compile time.
+# nuitka-project: --noinclude-pytest-mode=nofollow
 """Dedupe TV episodes by quality. Keep best, delete worse + sidecar files.
 
 Quality ranking:
